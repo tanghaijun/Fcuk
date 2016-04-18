@@ -1,0 +1,13 @@
+﻿.login {
+    display: block;
+}
+
+.main {
+    display: none;
+    margin: auto;
+}
+.content {
+    width: 92%;
+    height: 500px;
+    border: 1px groove red;
+}
