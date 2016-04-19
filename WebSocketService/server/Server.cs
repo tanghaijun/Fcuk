@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.WebSockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,9 +12,9 @@ using System.Windows.Forms;
 using System.Net;
 using System.Threading;
 using System.Net.Sockets;
-using 通信.model;
+using Connection.model;
 
-namespace 通信
+namespace Connection
 {
     public partial class Server : Form
     {
@@ -122,7 +121,8 @@ namespace 通信
                     //传入格式错误
                     textBox2.AppendText("发送数据：“" + sendMsg + "” 至客户端....\r\n");
 
-                    user.Client.SendTo(Common.PackData("{\"action\":\"error\",\"mes\":\"请求错误\"}"), user.Ip);
+                    sendMsg = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new {action="error",mes="请求错误" });
+                    proMessage.SendMessage(user, sendMsg, SendTypeEnum.SendType.signal, userlist);
                 }
 
                 //}

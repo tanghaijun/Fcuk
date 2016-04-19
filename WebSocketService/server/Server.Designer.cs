@@ -1,4 +1,4 @@
-﻿namespace 通信
+﻿namespace Connection
 {
     partial class Server
     {

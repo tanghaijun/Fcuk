@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("通信")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("四川理工")]
-[assembly: AssemblyProduct("通信")]
-[assembly: AssemblyCopyright("Copyright © 四川理工 2012")]
+[assembly: AssemblyCompany("tang")]
+[assembly: AssemblyProduct("websocket")]
+[assembly: AssemblyCopyright("Copyright © tang")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

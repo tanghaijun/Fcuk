@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace 通信.model
+namespace Connection.model
 {
     public class Common
     {
@@ -17,7 +17,7 @@ namespace 通信.model
         {
             byte[] contentBytes = null;
             byte[] temp = Encoding.UTF8.GetBytes(message);
-
+           
             if (temp.Length < 126)
             {
                 contentBytes = new byte[temp.Length + 2];
@@ -30,13 +30,24 @@ namespace 通信.model
                 contentBytes = new byte[temp.Length + 4];
                 contentBytes[0] = 0x81;
                 contentBytes[1] = 126;
-                contentBytes[2] = (byte)(temp.Length & 0xFF);
-                contentBytes[3] = (byte)(temp.Length >> 8 & 0xFF);
+                contentBytes[2] = (byte)(temp.Length >> 8);
+                contentBytes[3] = (byte)(temp.Length & 0xFF);
                 Array.Copy(temp, 0, contentBytes, 4, temp.Length);
             }
             else
             {
-                // 暂不处理超长内容  
+                contentBytes = new byte[temp.Length + 10];
+                contentBytes[0] = 0x81;
+                contentBytes[1] = 127;
+                contentBytes[2] = 0;
+                contentBytes[3] = 0;
+                contentBytes[4] = 0;
+                contentBytes[5] = 0;
+                contentBytes[6] = (byte)(temp.Length >> 24);
+                contentBytes[7] = (byte)(temp.Length >> 16);
+                contentBytes[8] = (byte)(temp.Length >> 8);
+                contentBytes[9] = (byte)(temp.Length & 0xFF);
+                Array.Copy(temp, 0, contentBytes, 10, temp.Length);
             }
 
             return contentBytes;

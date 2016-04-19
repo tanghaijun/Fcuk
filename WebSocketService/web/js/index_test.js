@@ -1,37 +1,45 @@
 ﻿var ws;
 $(function () {
     connecService(success);
-    
+
 });
 
 function success() {
     apendMes("连接成功");
     $("#send").click(function () {
-        var txt = $("#text").val();
-        if (txt && txt.length > 0) {
-            var data = '{"message":"' + txt + '","action":"allmessage"}';
-            sendMessage(data);
-        } else {
-            $("#text").focus();
-        }
+        clickevent();
     });
-}
+    document.onkeydown = function () {
+        if (event.keyCode == 13) {
+            clickevent();
+        }
 
+    };
+}
+function clickevent() {
+    var txt = $("#text").val();
+    if (txt && txt.length > 0) {
+        var data = '{"message":"' + txt + '","action":"allmessage"}';
+        sendMessage(data);
+        $("#text").val("");
+
+    }
+    $("#text").focus();
+}
 function connecService(success) {
     var support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
     if (support == null) {
         appendMessage("浏览器不支持websocket<br/>");
         return;
     }
-    ws = new window[support]('ws://192.168.187.251:8888/');
+    ws = new window[support]('ws://182.92.77.101:8888/');
     // 接收到服务器发来的消息
     ws.onmessage = function (evt) {
         var newdata = $.parseJSON(evt.data);
         switch (newdata.action) {
             case "login":
                 if (newdata.state == "ok") {
-                   
-                    //apendMes(newdata.message);
+                    apendMes(newdata.message);
                 } else {
                     alert(newdata.message);
                 }
@@ -51,11 +59,9 @@ function connecService(success) {
 
     // 服务器被断开
     ws.onclose = function () {
-        appendMessage("断开连接");
+        apendMes("断开连接");
         ws.close();
         ws = null;
-        $(".login").show();
-        $(".main").hide();
     };
 }
 function appendMessage(message) {

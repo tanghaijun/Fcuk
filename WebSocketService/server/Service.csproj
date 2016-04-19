@@ -8,9 +8,9 @@
     <ProjectGuid>{8C6A192D-8592-4D78-A5D9-6E52DA11A7CE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>通信</RootNamespace>
-    <AssemblyName>通信</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Connection</RootNamespace>
+    <AssemblyName>WebScoketServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

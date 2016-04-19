@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace 通信.model
+namespace Connection.model
 {
     public class Login
     {

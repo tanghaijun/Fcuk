@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-namespace 通信.model
+namespace Connection.model
 {
     public class proMessage
     {
@@ -49,8 +49,8 @@ namespace 通信.model
                 case "allmessage":
                     var messagemodel = js.Deserialize<Message>(data);
                     returndata = "ok";
-                    mes = user.UserName + "(" + user.Ip + ")对所有人说：" + messagemodel.message + "----------" + DateTime.Now.ToString();
-                    mes = HttpUtility.UrlEncode(mes, Encoding.UTF8);
+                    mes = user.UserName + "(" + user.Ip + ")对所有人说：" + messagemodel.message + "----------";
+                    
                     sendtype = SendTypeEnum.SendType.all;
                     break;
             }
@@ -92,8 +92,9 @@ namespace 通信.model
                 {
                     //textBox2.AppendText("向" + user.Ip.ToString() + "发送消息!\r\n");
                     //int num = user.Client.SendTo(Common.PackData(message), user.Ip);
-                    var bt = Common.PackData(message);
-                    user.Client.Send(bt,bt.Length,System.Net.Sockets.SocketFlags.None);
+                    //var bt = Common.PackData(message);
+                    //user.Client.Send(bt,bt.Length,System.Net.Sockets.SocketFlags.None);
+                    user.Client.Send(Common.PackData(message));
                 }
 
                 //user.Client.Send(Common.PackData(message));

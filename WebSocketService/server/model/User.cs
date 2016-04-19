@@ -8,7 +8,7 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace 通信
+namespace Connection
 {
     public class User
     {
