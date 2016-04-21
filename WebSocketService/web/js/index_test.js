@@ -6,6 +6,11 @@ $(function () {
 
 function success() {
     apendMes("连接成功");
+    var data = {
+        message: "",
+        action: "list"
+    };
+    sendMessage(JSON.stringify(data));
     $("#send").click(function () {
         clickevent();
     });
@@ -19,8 +24,11 @@ function success() {
 function clickevent() {
     var txt = $("#text").val();
     if (txt && txt.length > 0) {
-        var data = '{"message":"' + txt + '","action":"allmessage"}';
-        sendMessage(data);
+        var data = {
+            message: txt,
+            action: "allmessage"
+        };
+        sendMessage(JSON.stringify(data));
         $("#text").val("");
 
     }
@@ -32,7 +40,7 @@ function connecService(success) {
         appendMessage("浏览器不支持websocket<br/>");
         return;
     }
-    ws = new window[support]('ws://182.92.77.101:8888/');
+    ws = new window[support]('ws://192.168.187.251:8888/');
     // 接收到服务器发来的消息
     ws.onmessage = function (evt) {
         var newdata = $.parseJSON(evt.data);
@@ -45,11 +53,14 @@ function connecService(success) {
                 }
                 break;
             case "allmessage":
-                apendMes(newdata.message);
+                apendMes(newdata.data);
                 break;
 
             case "logout":
-
+                apendMes("断开连接");
+                break;
+            case "list":
+                apendMes(newdata.data);
                 break;
         }
     };
@@ -59,6 +70,11 @@ function connecService(success) {
 
     // 服务器被断开
     ws.onclose = function () {
+        if (ws != null) {
+            var data = '{"message":"","action":"logout"}';
+            sendMessage(data);
+        }
+       
         apendMes("断开连接");
         ws.close();
         ws = null;
@@ -69,6 +85,7 @@ function appendMessage(message) {
 }
 function sendMessage(data) {
     if (ws) {
+
         ws.send(data);
     }
 }

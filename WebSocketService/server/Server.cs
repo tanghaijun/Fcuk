@@ -13,6 +13,7 @@ using System.Net;
 using System.Threading;
 using System.Net.Sockets;
 using Connection.model;
+using System.Web;
 
 namespace Connection
 {
@@ -20,7 +21,7 @@ namespace Connection
     {
         public Server()
         {
-            
+
             InitializeComponent();
             TextBox.CheckForIllegalCrossThreadCalls = false;
         }
@@ -30,9 +31,13 @@ namespace Connection
         Socket mylistener = null;
         bool isNormalExit = false;
         private IPEndPoint localEP = null;
-        
+
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnClose.Enabled = true;
+            isNormalExit = false;
+            mylistener = null;
+            userlist.Clear();
             try
             {
                 ipserver = IPAddress.Parse(textBox1.Text.Trim());
@@ -89,56 +94,63 @@ namespace Connection
             textBox2.AppendText("已经发送握手协议了....\r\n");
             userlist.Add(user);
             AddUser(user);
-            int num = 0;
-            while (!isNormalExit)
+            while (true)
             {
-                //try
-                //{
-                //接受客户端数据
-                byte[] buffer = new byte[1024];
-                textBox2.AppendText("等待客户端数据....\r\n");
-                //Thread.Sleep(100);
-                //user.Client.ReceiveTimeout = 10000;
-
-                int length = user.Client.Receive(buffer);//接受客户端信息
-                string clientMsg = AnalyticData(buffer, length);
-                buffer = null;
-                textBox2.AppendText("接受到客户端数据：" + clientMsg + "\r\n");
-
-                string sendMsg = "";
-                SendTypeEnum.SendType sendtype = SendTypeEnum.SendType.none;
-                //提取其中的action
-                var reg = new Regex("\"action\":\"([a-zA-Z]{2,})\"");
-                var ismatch = reg.IsMatch(clientMsg);
-                if (ismatch)
+                try
                 {
-                    var action = reg.Match(clientMsg).Groups[1].Value;
-                    sendMsg = proMessage.MessageHandler(action, clientMsg, user, userlist, out sendtype, new proMessage.Adduser(AddUser));
-                    proMessage.SendMessage(user, sendMsg, sendtype, userlist);
+                    //接受客户端数据
+                    byte[] buffer = new byte[1024];
+                    textBox2.AppendText("等待客户端数据....\r\n");
+                    //Thread.Sleep(100);
+                    //user.Client.ReceiveTimeout = 10000;
+
+                    int length = user.Client.Receive(buffer);//接受客户端信息
+                    string clientMsg = AnalyticData(buffer, length);
+                    clientMsg = HttpUtility.UrlDecode(clientMsg);
+                    buffer = null;
+                    textBox2.AppendText("接受到客户端数据：" + clientMsg + "\r\n");
+
+                    string sendMsg = "";
+                    SendTypeEnum.SendType sendtype = SendTypeEnum.SendType.none;
+                    //提取其中的action
+                    if (clientMsg == "�")
+                    {
+                        //close
+                        user.Client.Close();
+                        userlist.Remove(user);
+                        RemoveUser(user);
+                        break;
+                    }
+
+                    var reg = new Regex("\"action\":\"([a-zA-Z]{2,})\"");
+                    var ismatch = reg.IsMatch(clientMsg);
+                    if (ismatch)
+                    {
+                        var action = reg.Match(clientMsg).Groups[1].Value;
+                        sendMsg = proMessage.MessageHandler(action, clientMsg, user, userlist, out sendtype, new proMessage.Adduser(AddUser));
+                        proMessage.SendMessage(user, sendMsg, sendtype, userlist);
+                    }
+                    else
+                    {
+                        //传入格式错误
+                        textBox2.AppendText("发送数据：“" + sendMsg + "” 至客户端....\r\n");
+
+                        sendMsg = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new { action = "error", mes = "请求错误" });
+                        proMessage.SendMessage(user, sendMsg, SendTypeEnum.SendType.signal, userlist);
+                    }
+
                 }
-                else
+                catch (Exception e)
                 {
-                    //传入格式错误
-                    textBox2.AppendText("发送数据：“" + sendMsg + "” 至客户端....\r\n");
+                    //MessageBox.Show(e.ToString());
 
-                    sendMsg = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new {action="error",mes="请求错误" });
+                    var sendMsg = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new { action = "logout", mes = "请求错误" });
                     proMessage.SendMessage(user, sendMsg, SendTypeEnum.SendType.signal, userlist);
+                    RemoveUser(user);
+                    break;
                 }
-
-                //}
-                //catch (Exception e)
-                //{
-                //    MessageBox.Show(e.ToString());
-                //    isNormalExit = true;
-                //}
 
             }
-
-
-
-
-
-
         }
         public void AddUser(User user)
         {
@@ -152,16 +164,27 @@ namespace Connection
         public void RemoveUser(User user)
         {
             string name = user.Ip.ToString();
-            foreach (ListViewItem item in listView1.Items)
+            if (listView1.Items.Count > 0)
             {
-                if (item.Text == name)
+                foreach (ListViewItem item in listView1.Items)
                 {
-                    listView1.Items.Remove(item);
-                    break;
+                    if (item.Text == name)
+                    {
+                        listView1.Items.Remove(item);
+                        break;
+                    }
                 }
             }
-            userlist.Remove(user);
-            user.Client.Close();
+            if (userlist.Count > 0)
+            {
+                userlist.Remove(user);
+
+            }
+            if (user.Client != null)
+            {
+                user.Client.Close();
+            }
+
             textBox2.AppendText("当前用户数：" + userlist.Count.ToString() + "!");
 
 
@@ -245,7 +268,7 @@ namespace Connection
             byte[] encryptionString = SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"));
             return Convert.ToBase64String(encryptionString);
         }
-       
+
         /// <summary>
         /// 解析客户端数据包
         /// </summary>

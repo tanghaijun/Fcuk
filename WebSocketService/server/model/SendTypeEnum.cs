@@ -28,7 +28,11 @@ namespace Connection.model
             /// <summary>
             /// 登出
             /// </summary>
-            logout = 3
+            logout = 3,
+            /// <summary>
+            /// 列表
+            /// </summary>
+            list = 4
 
         };
         public enum MessageState
