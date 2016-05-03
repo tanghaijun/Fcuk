@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuckApi", "FuckApi\FuckApi.csproj", "{134CFA04-6C4C-4B9F-AE20-E47A65A1E9B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuckApi", "SLFuck\FuckApi\FuckApi.csproj", "{134CFA04-6C4C-4B9F-AE20-E47A65A1E9B4}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "NodeServer", "http://localhost:48398", "{CAB57119-DCF9-482E-A114-C86DA60D29BA}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_48398"
-		Debug.AspNetCompiler.PhysicalPath = "..\NodeServer\"
+		Debug.AspNetCompiler.PhysicalPath = "NodeServer\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48398\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_48398"
-		Release.AspNetCompiler.PhysicalPath = "..\NodeServer\"
+		Release.AspNetCompiler.PhysicalPath = "NodeServer\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48398\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\NodeServer\"
+		SlnRelativePath = "NodeServer\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
@@ -30,20 +30,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "http://localhost:486
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_48690"
-		Debug.AspNetCompiler.PhysicalPath = "..\Web\"
+		Debug.AspNetCompiler.PhysicalPath = "Web\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48690\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_48690"
-		Release.AspNetCompiler.PhysicalPath = "..\Web\"
+		Release.AspNetCompiler.PhysicalPath = "Web\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_48690\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\Web\"
+		SlnRelativePath = "Web\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
