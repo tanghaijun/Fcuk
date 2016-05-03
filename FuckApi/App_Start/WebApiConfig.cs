@@ -14,6 +14,7 @@ namespace FuckApi
                 routeTemplate: "api/{controller}/{Action}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
