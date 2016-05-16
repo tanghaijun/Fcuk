@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DsModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace FuckApi.Controllers
         public IEnumerable<string> Index()
         {
             return new string[] { "value1", "value2" };
+            
         }
 
 

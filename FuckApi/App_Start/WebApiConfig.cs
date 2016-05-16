@@ -11,7 +11,7 @@ namespace FuckApi
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{Action}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.Remove(config.Formatters.XmlFormatter);
