@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,8 +46,124 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Models\DsAskPrice.cs" />
+    <Compile Include="Models\DsAskPriceFy.cs" />
+    <Compile Include="Models\DsAskPriceOrder.cs" />
+    <Compile Include="Models\DsAskPricePay.cs" />
+    <Compile Include="Models\DsAskPriceSettlement.cs" />
+    <Compile Include="Models\DsAskPriceSettlementCertificate.cs" />
+    <Compile Include="Models\DsAskPriceSettlementToOrder.cs" />
+    <Compile Include="Models\DsBuilding.cs" />
+    <Compile Include="Models\DsBuildingFloor.cs" />
+    <Compile Include="Models\DsBuildingGroup.cs" />
+    <Compile Include="Models\DsBuildingGroupHouseType.cs" />
+    <Compile Include="Models\DsBuildingGroupHouseTypePhoto.cs" />
+    <Compile Include="Models\DsBuildingGroupToConsultant.cs" />
+    <Compile Include="Models\DsBuildingHouse.cs" />
+    <Compile Include="Models\DsBuildingHouseNumber.cs" />
+    <Compile Include="Models\DsBuildingPhoto.cs" />
+    <Compile Include="Models\DsBuildingUnit.cs" />
+    <Compile Include="Models\DsCity.cs" />
+    <Compile Include="Models\DsCostPeriod.cs" />
+    <Compile Include="Models\DsCoupon.cs" />
+    <Compile Include="Models\DsCouponFollow.cs" />
+    <Compile Include="Models\DsCouponOrder.cs" />
+    <Compile Include="Models\DsCouponPay.cs" />
+    <Compile Include="Models\DsCouponReturn.cs" />
+    <Compile Include="Models\DsCouponSettlement.cs" />
+    <Compile Include="Models\DsCouponSettlementCertificate.cs" />
+    <Compile Include="Models\DsCouponSettlementToOrder.cs" />
+    <Compile Include="Models\DsEnterprise.cs" />
+    <Compile Include="Models\DsEnterpriseBankCard.cs" />
+    <Compile Include="Models\DsEnterpriseCertificate.cs" />
+    <Compile Include="Models\DsEnterpriseJoinInApply.cs" />
+    <Compile Include="Models\DsEnterpriseToBuildingGroup.cs" />
+    <Compile Include="Models\DsFocu.cs" />
+    <Compile Include="Models\DsFocusFy.cs" />
+    <Compile Include="Models\DsFocusGroup.cs" />
+    <Compile Include="Models\DsFocusGroupToFy.cs" />
+    <Compile Include="Models\DsFocusGroupToQueue.cs" />
+    <Compile Include="Models\DsFocusGroupToSimulateFy.cs" />
+    <Compile Include="Models\DsFocusQueue.cs" />
+    <Compile Include="Models\DsFocusSimulateFy.cs" />
+    <Compile Include="Models\DsFy.cs" />
+    <Compile Include="Models\DsFyFollow.cs" />
+    <Compile Include="Models\DsFyOrder.cs" />
+    <Compile Include="Models\DsFyPay.cs" />
+    <Compile Include="Models\DsFyReturn.cs" />
+    <Compile Include="Models\DsFySettlement.cs" />
+    <Compile Include="Models\DsFySettlementCertificate.cs" />
+    <Compile Include="Models\DsFySettlementToOrder.cs" />
+    <Compile Include="Models\DsLog.cs" />
+    <Compile Include="Models\DsMessage.cs" />
+    <Compile Include="Models\DsSecondKill.cs" />
+    <Compile Include="Models\DsSecondKillFy.cs" />
+    <Compile Include="Models\DsSequence.cs" />
+    <Compile Include="Models\DsUser.cs" />
+    <Compile Include="Models\DsUserCertificate.cs" />
+    <Compile Include="Models\FuckContext.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceFyMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPricePayMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceSettlementCertificateMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceSettlementMap.cs" />
+    <Compile Include="Models\Mapping\DsAskPriceSettlementToOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingFloorMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingGroupHouseTypeMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingGroupHouseTypePhotoMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingGroupMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingGroupToConsultantMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingHouseMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingHouseNumberMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingPhotoMap.cs" />
+    <Compile Include="Models\Mapping\DsBuildingUnitMap.cs" />
+    <Compile Include="Models\Mapping\DsCityMap.cs" />
+    <Compile Include="Models\Mapping\DsCostPeriodMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponFollowMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponPayMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponReturnMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponSettlementCertificateMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponSettlementMap.cs" />
+    <Compile Include="Models\Mapping\DsCouponSettlementToOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsEnterpriseBankCardMap.cs" />
+    <Compile Include="Models\Mapping\DsEnterpriseCertificateMap.cs" />
+    <Compile Include="Models\Mapping\DsEnterpriseJoinInApplyMap.cs" />
+    <Compile Include="Models\Mapping\DsEnterpriseMap.cs" />
+    <Compile Include="Models\Mapping\DsEnterpriseToBuildingGroupMap.cs" />
+    <Compile Include="Models\Mapping\DsFocuMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusFyMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusGroupMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusGroupToFyMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusGroupToQueueMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusGroupToSimulateFyMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusQueueMap.cs" />
+    <Compile Include="Models\Mapping\DsFocusSimulateFyMap.cs" />
+    <Compile Include="Models\Mapping\DsFyFollowMap.cs" />
+    <Compile Include="Models\Mapping\DsFyMap.cs" />
+    <Compile Include="Models\Mapping\DsFyOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsFyPayMap.cs" />
+    <Compile Include="Models\Mapping\DsFyReturnMap.cs" />
+    <Compile Include="Models\Mapping\DsFySettlementCertificateMap.cs" />
+    <Compile Include="Models\Mapping\DsFySettlementMap.cs" />
+    <Compile Include="Models\Mapping\DsFySettlementToOrderMap.cs" />
+    <Compile Include="Models\Mapping\DsLogMap.cs" />
+    <Compile Include="Models\Mapping\DsMessageMap.cs" />
+    <Compile Include="Models\Mapping\DsSecondKillFyMap.cs" />
+    <Compile Include="Models\Mapping\DsSecondKillMap.cs" />
+    <Compile Include="Models\Mapping\DsSequenceMap.cs" />
+    <Compile Include="Models\Mapping\DsUserCertificateMap.cs" />
+    <Compile Include="Models\Mapping\DsUserMap.cs" />
+    <Compile Include="Models\Mapping\rsync_dataMap.cs" />
+    <Compile Include="Models\rsync_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
