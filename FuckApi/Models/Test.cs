@@ -7,9 +7,6 @@ namespace FuckApi.Models
 {
     public class Test
     {
-<<<<<<< HEAD
-          
-=======
->>>>>>> e5dab5dfc4e532dd66020024f2ca68bd793d835c
+
     }
 }
