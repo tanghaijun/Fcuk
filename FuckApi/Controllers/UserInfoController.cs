@@ -21,9 +21,13 @@ namespace FuckApi.Controllers
         }
 
         // GET api/userinfo/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            Test test = new Test();
+            test.Id = "2";
+            test.Name = "haha";
+            var result = Common.Convert.toJson(test);
+            return result;
         }
 
         // POST api/userinfo

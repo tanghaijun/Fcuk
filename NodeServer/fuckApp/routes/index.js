@@ -10,5 +10,12 @@ router.get('/', function (req, res, next) {
          res.render('index', {title: 'Express111',content:result.Name});
     });
 });
+//´ø²ÎÊý
+router.get('/:id', function (req, res, next) {
+    console.log("canshufangshi");
+    user.getData('/api/userinfo/'+req.params.id,"Get","",function(result){
+        res.render('index', {title: 'Express111',content:result.Name});
+    });
+});
 
 module.exports = router;
