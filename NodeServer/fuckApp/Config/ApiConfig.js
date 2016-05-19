@@ -1,6 +1,6 @@
 var option = {
-    hostname: 'test.fang.com',  //一定不能加http:// 会造成错误，我操
-   // hostname: 'localhost',
+    //hostname: 'test.fang.com',  //一定不能加http:// 会造成错误，我操
+    hostname: 'localhost',
     port: 80,
    // path: 'path', //访问的方法地址
     path:'/',
