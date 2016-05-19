@@ -6,10 +6,8 @@ var user=require('../Common/ApiData')
 router.get('/', function (req, res, next) {
 
      user.getData('/api/userinfo',"Get","",function(result){
-        console.log("1"+result.Name);
+         res.render('index', {title: 'Express111',content:result.Name});
     });
-    res.render('index', {title: 'Express111'});
-
 });
 
 module.exports = router;

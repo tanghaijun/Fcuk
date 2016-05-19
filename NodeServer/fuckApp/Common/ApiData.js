@@ -6,18 +6,7 @@ var Obj; //返回的数据对象
 var main={
     getData: function (path,method,hostname,callback) {
         var opt = [];
-        opt = optModel.Init(path, method);
-
-        //需要使用回调方法，参数传递有问题
-       //switch (arguments.length) {
-       //    case 2:
-       //        opt = optModel.Init(path, method);
-       //        break;
-       //    case 3:
-       //        opt = optModel.Init(path, method, hostname);
-       //        break;
-       //}
-
+        opt = optModel.Init(path, method,hostname);
        var req1 = http.request(opt, function (res) {
            console.log("Got response: " + res.statusCode);
            res.on('data', function (obj) {
